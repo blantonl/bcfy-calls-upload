@@ -95,11 +95,13 @@ SDRTrunk, Trunking Recorder, and new recorders ("Generic").
 `tg`, `freq`, `ts` and `callDuration` are required (`NO-TG-SENT`, `NO-FREQ-SENT`,
 `NO-TIMESTAMP-SENT`, `NO-CALL-DURATION-SENT` otherwise).
 
-### Slot style
+### Conventional channel uploads
 
-VoxCall and Vox Recorder. The fields of the form-field style, but `tg` is always a **slot**, on
-trunked nodes too (where each slot stands for a talkgroup). Timing is looser: ±90 s instead of
-±15 s.
+For recorders that record conventional channels, one channel at a time, such as VoxCall and Vox
+Recorder. The fields of the form-field style, with `tg` always a **slot**: the channel's number on
+the node. Timing is looser: ±90 s instead of ±15 s.
+
+(A node of this kind on a trunked system is rare: there, each slot stands for a talkgroup.)
 
 ### Patches
 
@@ -110,7 +112,7 @@ under the first one sent: so send the patch's main talkgroup first.
 
 ### Slots
 
-On a conventional node (any style) and on a slot-style node, `tg` (or the metadata's `talkgroup`)
+On a conventional node (any style) and on a node taking conventional channel uploads, `tg` (or the metadata's `talkgroup`)
 is a slot number, not a frequency or talkgroup. The node's slots are set when it's approved and
 listed on its management page. A slot the node doesn't have is refused with
 `No-Freq-Table-Entry-For-Upload` (conventional) or `No-Tg-Table-Entry-For-Upload` (trunked).
@@ -118,7 +120,7 @@ listed on its management page. A slot the node doesn't have is refused with
 ## Timing
 
 Broadcastify compares the call's **end** (start + length) with its own clock when the request
-arrives. More than **15 s** either way (90 s for the slot style) and the call is refused:
+arrives. More than **15 s** either way (90 s for conventional channel uploads) and the call is refused:
 
 ```
 1 REJECTED-CALL-SKEW-TOO-LONG-<seconds>-See:https://www.broadcastify.com/skew
@@ -193,3 +195,4 @@ be kept. Registering the same call again within 90 s gets the same answer.
 | Date | Change |
 |---|---|
 | 2026-11-15 | Version 1: written down from the live service. No change to the service |
+| 2026-11-15 | "Slot style" renamed "conventional channel uploads". No change to the service |
