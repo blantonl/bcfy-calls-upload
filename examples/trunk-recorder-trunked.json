@@ -1,0 +1,20 @@
+{
+  "freq": 851162500,
+  "start_time": 1794590100,
+  "stop_time": 1794590106,
+  "emergency": 0,
+  "encrypted": 0,
+  "call_length": 6,
+  "talkgroup": 1201,
+  "talkgroup_tag": "Fire Dispatch",
+  "audio_type": "digital",
+  "short_name": "examplecounty",
+  "freqList": [
+    { "freq": 851162500, "time": 1794590100, "pos": 0.00, "len": 6.12, "error_count": 0, "spike_count": 0 }
+  ],
+  "srcList": [
+    { "src": 4801123, "time": 1794590100, "pos": 0.00, "emergency": 0, "signal_system": "", "tag": "" },
+    { "src": 4801456, "time": 1794590103, "pos": 3.24, "emergency": 0, "signal_system": "", "tag": "" }
+  ],
+  "patched_talkgroups": [1201, 1305]
+}
