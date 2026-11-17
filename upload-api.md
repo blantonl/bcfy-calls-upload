@@ -139,6 +139,7 @@ most answers come with `200`, a few with `403` or `500`.
 | `1 SKIPPED---ALREADY-RECEIVED-THIS-CALL` | Broadcastify already has this call, from this node or another one hearing the same system | Nothing: don't upload. Not an error |
 | `1 Skip-Unit-To-Unit-CT3`, `1 Skip-Unit-To-Unit-CT4` | A unit-to-unit (private) call (P25 or EDACS talkgroup above 65535): not taken | Nothing. Better: don't send them |
 | `1 REJECTED-CALL-SKEW-TOO-LONG-…` | Outside the time window ([Timing](#timing)) | Check the clock and how soon calls are sent. Don't retry the call |
+| `1 REJECTED-INVALID-CALL-TIMESTAMP` | The call's start, end or length is missing or isn't a number | Fix the request |
 | `1 No-Freq-Table-Entry-For-Upload`, `1 No-Tg-Table-Entry-For-Upload` | The slot isn't on the node | Check the slot numbers against the node's page |
 | `1 NO-TG-SENT`, `1 NO-FREQ-SENT`, `1 NO-TIMESTAMP-SENT`, `1 NO-CALL-DURATION-SENT`, `1 SLOT_ENTRY_ERROR` | A required field is missing, or the slot isn't a number | Fix the request |
 | `1 NO-TRUNK-RECORDER-METADATA-FILE-SENT`, `1 TRUNK-RECORDER-METADATA-ERROR` (HTTP 500) | Trunk Recorder style: no `metadata` part, or it isn't JSON | Fix the request |
@@ -147,6 +148,7 @@ most answers come with `200`, a few with `403` or `500`.
 | `1 NO-SYSTEM-ID-SPECIFIED`, `1 INVALID-SYSTEM-ID` | No such node | Fix the settings |
 | `1 No API Key Specified` (HTTP 403), `1 Invalid-API-Key`, `1 API-Key-Access-Denied`, `1 API-Key-Not-Authorized-For-System` | The key is missing, unknown, another account's, or not this node's | Fix the settings |
 | `1 Uploads-not-enabled-for-this-system` | The node is turned off | Ask support |
+| `1 Unsupported-Node-Type-Encoder-<n>-CallType-<n>` | The node is set up with a recorder and system type Broadcastify can't take together | Ask support |
 | `1 Uploads-disabled-systemwide` | Broadcastify isn't taking calls for now | Try later |
 | `1 Nothing-Sent` | Empty request | Fix the request |
 | Anything else, `5xx`, or no answer | Not taken | One retry is fine while the call is still within the time window. A retry that answers `SKIPPED---ALREADY-RECEIVED-THIS-CALL` means the first attempt was taken |
@@ -162,7 +164,7 @@ help until its settings change.
 |---|---|
 | Body | The audio file, as is |
 | `Content-Type` | `audio/aac` for `m4a`, `audio/mpeg` for `mp3`: exactly the type of the `enc` sent. The URL is signed for it |
-| When | Straight away: the URL expires **30 s** after it's issued |
+| When | Straight away: the URL expires **180 s** after it's issued |
 | Again | Never: each URL is for one call. Don't keep or reuse it |
 
 ### Audio format

@@ -33,7 +33,7 @@ if [ "$code" != 0 ]; then
   exit 1
 fi
 
-# 2. Upload the audio to the URL it answered, within 30 s, with the matching Content-Type.
+# 2. Upload the audio to the URL it answered, within 180 s, with the matching Content-Type.
 status=$(curl -sS -o /dev/null -w '%{http_code}' -X PUT -H "Content-Type: $type" \
   --data-binary @"$audio" "$rest")
 if [ "$status" = 200 ]; then

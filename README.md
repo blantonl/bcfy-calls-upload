@@ -18,7 +18,7 @@ up to send them.
    ID and API key.
 2. For each call, as soon as it ends: `POST https://api.broadcastify.com/call-upload`
    (`multipart/form-data`) with the node's credentials and the call's fields.
-3. On `0 <url>`, `PUT` the audio to `<url>` within 30 s, with `Content-Type: audio/aac` (M4A) or
+3. On `0 <url>`, `PUT` the audio to `<url>` within 180 s, with `Content-Type: audio/aac` (M4A) or
    `audio/mpeg` (MP3).
 
 Keep the recorder's clock synchronized: a call more than 15 s off is refused.
